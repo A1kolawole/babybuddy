@@ -621,9 +621,11 @@ def _weight_statistics(child):
     oldest = instances.last()
 
     if newest != oldest:
-        weight_change = newest.weight - oldest.weight
         weeks = (newest.date - oldest.date).days / 7
-        weight["change_weekly"] = weight_change / weeks
+        if weeks > 0:
+            weight_change = newest.weight - oldest.weight
+            weight["change_weekly"] = weight_change
+
 
     return weight
 
